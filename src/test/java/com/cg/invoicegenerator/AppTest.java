@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.cg.invoicegenerator.model.InvoiceSummary;
 import com.cg.invoicegenerator.model.Ride;
 
 public class AppTest {
@@ -34,7 +35,8 @@ public class AppTest {
 	@Test
 	public void givenMultipleRides_ShouldReturnInvoiceSummary() {
 		Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-		double totalFare = invoiceService.calculateFare(rides);
-		assertEquals(30.0, totalFare, 0.0);
+		InvoiceSummary summary = invoiceService.calculateFare(rides);
+		InvoiceSummary actualSummary = new InvoiceSummary(2, 30.0);
+		assertEquals(actualSummary, summary);
 	}
 }

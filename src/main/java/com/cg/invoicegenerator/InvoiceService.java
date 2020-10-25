@@ -1,5 +1,6 @@
 package com.cg.invoicegenerator;
 
+import com.cg.invoicegenerator.model.InvoiceSummary;
 import com.cg.invoicegenerator.model.Ride;
 
 public class InvoiceService {
@@ -12,11 +13,11 @@ public class InvoiceService {
 		return Math.max(MINIMUM_FARE, totalFare);
 	}
 
-	public double calculateFare(Ride[] rides) {
+	public InvoiceSummary calculateFare(Ride[] rides) {
 		double totalFare = 0;
 		for (Ride ride : rides)
 			totalFare += this.calculateFare(ride.getDistance(), ride.getTime());
-		return totalFare;
+		return new InvoiceSummary(rides.length, totalFare);
 	}
 
 }
